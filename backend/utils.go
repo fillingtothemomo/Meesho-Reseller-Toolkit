@@ -14,7 +14,6 @@ import (
 
 // Paths/config - tweak if needed
 const (
-	TemplatesDir   = "templates"
 	StaticShellDir = "static-shell"
 	DeploymentsDir = "deployments"
 )

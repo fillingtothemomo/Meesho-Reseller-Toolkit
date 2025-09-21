@@ -23,13 +23,17 @@ func handleBuild(c *fiber.Ctx) error {
 		return fiber.NewError(fiber.StatusInternalServerError, "failed create deployment folder: "+err.Error())
 	}
 
-	// Save all images in outDir/images
+	// Save all images in outDir/images, but only create if it doesn't exist
 	outImagesDir := filepath.Join(outDir, "images")
-	if err := os.MkdirAll(outImagesDir, 0755); err != nil {
-		return fiber.NewError(fiber.StatusInternalServerError, "failed create deployment images folder: "+err.Error())
+	if _, err := os.Stat(outImagesDir); os.IsNotExist(err) {
+		if err := os.MkdirAll(outImagesDir, 0755); err != nil {
+			return fiber.NewError(fiber.StatusInternalServerError, "failed create deployment images folder: "+err.Error())
+		}
+	} else if err != nil {
+		return fiber.NewError(fiber.StatusInternalServerError, "failed to check deployment images folder: "+err.Error())
 	}
 
-	// Handle multipart/form-data and Json Body
+	// Handle if images sent from fe, as in multipart/form-data
 	if strings.HasPrefix(ct, "multipart/") {
 		// TODO_ASHISH : Handle multipart, actual sending files
 		// // Parse multipart form via net/http on the request
@@ -81,7 +85,7 @@ func handleBuild(c *fiber.Ctx) error {
 	}
 
 	// just check if the template exists
-	templateDir := filepath.Join(TemplatesDir, req.TemplateID)
+	templateDir := filepath.Join(StaticShellDir, req.TemplateID)
 	if fi, err := os.Stat(templateDir); err != nil || !fi.IsDir() {
 		cleanupDeployment(outDir)
 		return fiber.NewError(fiber.StatusBadRequest, "template not found: "+req.TemplateID)
