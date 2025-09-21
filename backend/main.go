@@ -5,12 +5,19 @@ import (
 	"os"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 func main() {
 
 	app := fiber.New()
 
+	// Enable CORS for all origins
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: "*",
+		AllowMethods: "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS",
+		AllowHeaders: "*",
+	}))
 	// checks here
 	if _, err := os.Stat(DeploymentsDir); os.IsNotExist(err) {
 		fmt.Println("Deployments directory does not exist, creating it")

@@ -102,7 +102,7 @@ func handleBuild(c *fiber.Ctx) error {
 	resp := map[string]interface{}{
 		"ok":            true,
 		"deployment_id": deployID,
-		"index":         indexURL,
+		"index":         "localhost:8080"+indexURL,
 	}
 
 	// resp := map[string]interface{}{

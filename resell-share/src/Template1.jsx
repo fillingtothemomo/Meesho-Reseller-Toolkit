@@ -13,6 +13,7 @@ export default function Template1() {
     "Women's Fancy Skirt | Women's Trendy Comfortable Skirt\nFabric: Crepe\nPattern: Striped\nNet Quantity (N): 1\nSizes: 26,28,30,32,34,36,38, S, M, L, XL, XXL\nCountry of Origin: India";
 
   const originalPrice = 300; // Original price
+const [linkValidity, setLinkValidity] = useState("12"); // default 12 hours
 
   const [resellingPrice, setResellingPrice] = useState("");
   const [description, setDescription] = useState(defaultDescription);
@@ -77,7 +78,13 @@ Country of Origin: India`,
 
     const result = await response.json();
     console.log("✅ Response:", result);
-    alert("Template 1 data sent successfully!");
+        if (result.index) {
+      await navigator.clipboard.writeText(result.index);
+      alert("Link generated and copied to clipboard successfully!");
+    } else {
+      alert("Link generated, but no link found in response.");
+    }
+
   } catch (err) {
     console.error("❌ Error:", err);
     alert("Failed to send data. Check console for details.");
@@ -102,7 +109,7 @@ Country of Origin: India`,
       maxWidth: "600px",
       padding: "20px",
       borderRadius: "46px",
-      border: "15px solid #007bff", // thick blue border
+      border: "15px solid rgb(13, 14, 15)", // thick blue border
       background: "#fff",
          marginLeft: "500px",
       boxShadow: "0 6px 20px rgba(0,0,0,0.15)",
@@ -134,9 +141,22 @@ Country of Origin: India`,
           ))}
         </Carousel>
 
-        {/* Original Price */}
-        <div style={{ marginBottom: "12px", fontWeight: "bold", fontSize: "16px", color: "#007bff" }}>
-          Original Price: {originalPrice} Rs
+        <div style={{ marginBottom: "12px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <div style={{ fontWeight: "bold", fontSize: "16px", color: "#007bff" }}>
+            Original Price: {originalPrice} Rs
+          </div>
+          <div>
+            <label style={{ marginRight: "8px" }}>Link Validity:</label>
+            <select
+              value={linkValidity}
+              onChange={(e) => setLinkValidity(e.target.value)}
+              style={{ padding: "6px", borderRadius: "6px", border: "1px solid #007bff" }}
+            >
+              <option value="12">12 hours</option>
+              <option value="24">24 hours</option>
+              <option value="72">72 hours</option>
+            </select>
+          </div>
         </div>
 
         {/* Reselling Price + Live Margin */}
