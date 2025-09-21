@@ -103,3 +103,70 @@ sequenceDiagram
   Visitor->>Visitor: load shell and fetch data json
   Visitor->>Visitor: render page using local images
 ```
+
+## 2.
+
+```mermaid
+sequenceDiagram
+  participant Reseller
+  participant ResellerFrontend as "Reseller Frontend"
+  participant BuildAPI as "Build API"
+  participant TemplateSvc as "Template Service"
+  participant Storage as "S3 / CDN"
+  participant Buyer
+  participant MeeshoAPI as "Meesho Order API"
+  participant PaymentGW as "Payment Gateway"
+  participant Wallet as "Reseller Wallet Service"
+  participant Fulfill as "Fulfillment Service"
+  participant Analytics as "Analytics Service"
+  participant Notify as "Notification Service"
+
+  %% Reseller creates a personalized catalog / link
+  Reseller->>ResellerFrontend: Create catalog + select template + upload assets
+  ResellerFrontend->>BuildAPI: POST build request (payload + images)
+  BuildAPI->>TemplateSvc: Validate template manifest
+  alt template exists
+    BuildAPI->>BuildAPI: create deployment id & outDir
+    BuildAPI->>TemplateSvc: copy template assets
+    BuildAPI->>BuildAPI: process images (download/normalize/limit)
+    BuildAPI->>Storage: upload images & static shell to S3/CDN
+    BuildAPI->>BuildAPI: rewrite image URLs -> local CDN paths
+    BuildAPI-->>ResellerFrontend: return deployment URL & deep-link
+  else template missing
+    BuildAPI-->>ResellerFrontend: return error
+  end
+
+  %% Reseller shares link and buyer visits
+  Reseller->>Buyer: Share personalized link (deep-link)
+  Buyer->>Storage: GET deployment index (load catalog page + multimedia)
+  Storage-->>Buyer: return page + assets
+  Buyer->>Analytics: log page view / click (via Meesho API)
+  Note right of Analytics: view event recorded
+
+  %% Buyer places order via the shared catalog
+  Buyer->>MeeshoAPI: Add to cart -> Checkout (order request)
+  MeeshoAPI->>PaymentGW: Initiate payment intent
+  Buyer->>PaymentGW: Pay (UPI/Wallet/Cards/BNPL)
+  PaymentGW-->>Wallet: Credit payment to reseller wallet (LOCKED)
+  PaymentGW-->>MeeshoAPI: Notify payment success
+
+  %% Order created as pending approval to avoid false positives
+  MeeshoAPI->>ResellerFrontend: Create ORDER (status: PENDING_APPROVAL)
+  ResellerFrontend-->>Reseller: Notify new pending order
+  Reseller->>ResellerFrontend: Review & Approve order
+  ResellerFrontend->>MeeshoAPI: Approve order (confirm buyer details)
+  MeeshoAPI->>Fulfill: Push order for packing & shipment
+  Fulfill->>Notify: Send tracking/update to Buyer
+  Fulfill->>MeeshoAPI: Delivery confirmed
+  MeeshoAPI->>Analytics: Log conversion, order delivered
+
+  %% Funds release after risk window / returns closed
+  Note over Wallet,MeeshoAPI: Wait return/cancellation window OR inspect result
+  MeeshoAPI->>Wallet: Release funds to reseller (transfer to bank / withdraw)
+  Wallet-->>Reseller: Transfer available balance
+
+  %% Dashboard & additional features
+  MeeshoAPI->>Analytics: Log metrics (clicks, conversions, refunds)
+  ResellerFrontend->>Analytics: Fetch reseller metrics (dashboard)
+  ResellerFrontend->>Notify: Send seller receipts / monthly summary
+```
