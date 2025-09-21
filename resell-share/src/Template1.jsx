@@ -34,19 +34,56 @@ export default function Template1() {
   // Open Buyer View in new window
 
 const navigate = useNavigate();
+const handleSendLink = async () => {
+  // Map images to gallery format
+  const gallery = [
+    { url: "./images/1.jpg", alt: "skirt-1" },
+    { url: "./images/2.jpg", alt: "skirt-2" },
+    { url: "./images/3.jpg", alt: "skirt-3" },
+    { url: "./images/4.jpg", alt: "skirt-4" },
+    { url: "./images/5.jpg", alt: "skirt-5" },
+  ];
 
-const handleSendLink = () => {
-  const data = {
-    title,
-    contact,
-    resellingPrice,
-    description,
-    images: [p1, p2, p3, p4],
+  const payload = {
+    template_id: "template1",
+    data: {
+      heading: title || "NEW TESTING",
+      price: resellingPrice || "500 Rs",
+      contact: contact || "6565657656",
+      sizes: ["26", "28", "30", "32", "34", "36", "38", "S", "M", "L"],
+      description:
+        description ||
+        `Women's Fancy Skirt | Women's Trendy Comfortable Skirt
+Fabric: Crepe
+Pattern: Striped
+Net Quantity (N): 1
+Country of Origin: India`,
+      gallery,
+    },
   };
-  const encoded = btoa(JSON.stringify(data));
-  // Open buyer view in a new tab
-  window.open(`/buyer?data=${encoded}`, "_blank");
+
+  try {
+    const response = await fetch("http://localhost:8080/build", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to send data");
+    }
+
+    const result = await response.json();
+    console.log("✅ Response:", result);
+    alert("Template 1 data sent successfully!");
+  } catch (err) {
+    console.error("❌ Error:", err);
+    alert("Failed to send data. Check console for details.");
+  }
 };
+
 
 
   return (
@@ -67,7 +104,7 @@ const handleSendLink = () => {
       borderRadius: "46px",
       border: "15px solid #007bff", // thick blue border
       background: "#fff",
-         marginLeft: "400px",
+         marginLeft: "500px",
       boxShadow: "0 6px 20px rgba(0,0,0,0.15)",
       overflowY: "auto", // keep scroll if content is large
       // height: "100vh", <-- remove this

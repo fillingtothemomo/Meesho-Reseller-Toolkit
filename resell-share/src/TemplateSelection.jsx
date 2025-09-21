@@ -1,25 +1,40 @@
 import { useNavigate } from "react-router-dom";
 import "./TemplateSelection.css";
-
+import temp1 from "./assets/temp1.jpg"; // adjust path if needed
+import meeshoLogo from "./assets/m3.png";
 export default function TemplateSelection() {
   const navigate = useNavigate();
 
   return (
+
     <div className="template-selection-container">
+       <img src={meeshoLogo} alt="Meesho Logo" className="meesho-logo" />
       <h1>Select a Template</h1>
-      <div className="button-group">
-        <button
-          className="template-btn"
+      <div className="image-group">
+        <img
+          src={temp1}
+          alt="Template 1"
+          className="template-img"
           onClick={() => navigate("/template1")}
-        >
-          Template 1
-        </button>
-        <button
-          className="template-btn green"
+        />
+        <img
+          src={temp1}
+          alt="Template 2"
+          className="template-img"
           onClick={() => navigate("/template2")}
-        >
-          Template 2
-        </button>
+        />
+                <img
+          src={temp1}
+          alt="Template 3"
+          className="template-img"
+          onClick={() => navigate("/template2")}
+        />
+                <img
+          src={temp1}
+          alt="Template 4"
+          className="template-img"
+          onClick={() => navigate("/template2")}
+        />
       </div>
     </div>
   );
