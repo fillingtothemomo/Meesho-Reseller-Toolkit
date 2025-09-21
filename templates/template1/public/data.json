@@ -24,6 +24,10 @@
         {
             "url": "./images/3.jpg",
             "alt": "skirt-3"
+        },
+        {
+            "url": "./images/4.jpg",
+            "alt": "skirt-4"
         }
     ]
 }

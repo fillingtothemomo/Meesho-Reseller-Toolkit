@@ -1,17 +1,21 @@
 {
-    "heading": "Formal Shirts Men",
+    "template_id": "product-card",
+    "heading": "Women's Fancy Skirt",
     "price": "500 Rs",
     "contact": "6565657656",
     "sizes": [
-        "XS",
+        "26",
+        "28",
+        "30",
+        "32",
+        "34",
+        "36",
+        "38",
         "S",
         "M",
-        "L",
-        "XL",
-        "XXL",
-        "XXXL"
+        "L"
     ],
-    "description": "Cotton Shorts Men | Denim Jeans Men | Formal Shirts Men | Formal Trousers Men | Grey Blazers | Leather Jackets Men | Men Active Shorts | Men Sweaters | Men Trunks | Printed Briefs Men | Printed Tshirts | Sleeveless Sweatshirts Men | Sport Jackets Men | Sport Tracksuits Men | Vests | Wool Jackets Men",
+    "description": "Women's Fancy Skirt | Women's Trendy Comfortable Skirt\nFabric: Crepe\nPattern: Striped\nNet Quantity (N): 1\nCountry of Origin: India",
     "gallery": [
         {
             "url": "./images/1.jpg",

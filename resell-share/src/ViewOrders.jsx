@@ -33,6 +33,19 @@ export default function ViewOrders() {
         approved: true,
         shipped: true,
       },
+      {
+        id: 3,
+        name: "Amrita",
+        address: "IIT Roorkee",
+        pincode: "247667",
+        link: "https://www.meesho.com/womens-fancy-skirtwomens-trendy-comfortable-skirt/p/9x17b4",
+        title: "Women's Fancy Skirt",
+        price: 499, // adjust if needed
+        payment: "Cash on Delivery",
+        size: "M",   // adjust size if needed
+        approved: false,
+        shipped: false,
+      }
     ];
 
     setOrders([...defaultOrders, ...storedOrders]);

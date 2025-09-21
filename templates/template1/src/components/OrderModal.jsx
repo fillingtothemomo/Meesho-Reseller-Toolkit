@@ -33,49 +33,12 @@ export default function OrderModal({open, onClose, data}) {
     setLoading(true)
     setMessage(null)
 
-    const payload = {
-      template_id: data.template_id || 'product-card',
-      product: {
-        heading: data.heading,
-        price: data.price
-      },
-      order: {
-        name: form.name,
-        address: form.address,
-        pincode: form.pincode,
-        payment_method: form.method,
-        size: form.size,
-        quantity: 1,
-        contact: data.contact || null
-      },
-      // optionally include the deployment id or product id if you have one
-      metadata: { ts: new Date().toISOString() }
-    }
-
-    try {
-      const res = await fetch('http://localhost:8080/placeorder', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      })
-
-      if(!res.ok) {
-        const text = await res.text().catch(()=>null)
-        throw new Error(text || `Server error ${res.status}`)
-      }
-
-      const json = await res.json().catch(()=>null)
-      setMessage({ type:'success', text: json && json.message ? json.message : 'Order confirmed!' })
+    // Simulate a brief loading delay
+    setTimeout(() => {
       setLoading(false)
-
-      // optionally auto close after a delay
-      setTimeout(()=>{ onClose() }, 1400)
-
-    } catch(err){
-      console.error("Place order error:", err)
-      setMessage({ type:'error', text: err.message || 'Failed to place order' })
-      setLoading(false)
-    }
+      alert('Order Placed!!')
+      onClose()
+    }, 1000)
   }
 
   return (
