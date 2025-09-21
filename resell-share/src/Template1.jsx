@@ -43,7 +43,6 @@ const handleSendLink = async () => {
     { url: "./images/2.jpg", alt: "skirt-2" },
     { url: "./images/3.jpg", alt: "skirt-3" },
     { url: "./images/4.jpg", alt: "skirt-4" },
-    { url: "./images/5.jpg", alt: "skirt-5" },
   ];
 
   const payload = {
