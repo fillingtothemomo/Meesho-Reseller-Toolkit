@@ -1,0 +1,58 @@
+/* TemplateSelection.css */
+
+.template-selection-container {
+  background-color: #f9fafb; /* Meesho's light grayish background */
+  min-height: 100vh;
+  width: 1900px; /* constrain width like Meesho */
+  margin: 0 auto; /* center horizontally */
+  padding: 60px 20px;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box; /* ensure padding is inside width */
+}
+
+.template-selection-container h1 {
+  font-weight: 700;
+  font-size: 2.4rem;
+  margin-bottom: 40px;
+}
+
+.button-group {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.template-btn {
+  padding: 20px 50px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+  background-color: #fb3a6f; /* Meesho pink */
+  color: white;
+  min-width: 180px;
+}
+
+.template-btn.green {
+  background-color: #2dce89; /* Green variant */
+}
+
+.template-btn:hover {
+  box-shadow: 0 5px 15px rgb(251 58 111 / 0.4);
+  transform: translateY(-3px);
+}
+
+.template-btn.green:hover {
+  box-shadow: 0 5px 15px rgb(45 206 137 / 0.4);
+  transform: translateY(-3px);
+}

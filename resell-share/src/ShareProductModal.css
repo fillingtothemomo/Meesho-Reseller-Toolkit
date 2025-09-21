@@ -1,0 +1,238 @@
+/* Page */
+.page {
+  min-height: 100vh;
+  background-image: url('https://your-image-url-here.com/image.jpg'); /* Replace with your own URL */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 20px;
+}
+/* Add to ShareProductModal.css */
+
+/* ShareProductModal.css */
+
+.dropdown-btn {
+  width: 100%;
+  padding: 10px 16px;
+  margin-right: 400px;
+  text-align: left;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: black;  /* Make text black */
+  transition: background 0.2s ease;
+}
+
+
+.dropdown-btn:hover {
+  background-color: #f5f5f5;
+}
+
+.dropdown-btn:hover {
+  background-color: #f5f5f5;
+}
+
+/* Optional: modal, button, etc., existing styles you may already have */
+
+/* Open button */
+.open-btn {
+  padding: 10px 20px;
+  background: #514c4e;
+  color: white;
+  margin-top:350px ;
+  margin-left: 1100px;
+  border: none;
+  border-radius: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.open-btn:hover {
+  background: #b52b5c;
+}
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 1000;
+}
+
+/* Modal */
+.modal {
+  background: white;
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  border-radius: 16px 16px 0 0;
+  position: relative;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #555;
+  cursor: pointer;
+}
+
+/* Product */
+.product {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.product-img {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+.product-title {
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Resell */
+.resell {
+  margin-top: 20px;
+}
+.resell p {
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #555;
+}
+.toggle {
+  display: flex;
+  gap: 10px;
+}
+.toggle-btn {
+  padding: 6px 16px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background: white;
+  cursor: pointer;
+}
+.toggle-btn.active {
+  background: #e0e0e0;
+  font-weight: bold;
+}
+.toggle-btn.active-yes {
+  background: #ffe3f0;
+  color: #d6336c;
+  font-weight: bold;
+}
+
+/* Share */
+.share {
+  margin-top: 24px;
+}
+.share p {
+  font-weight: 500;
+  margin-bottom: 12px;
+  color: #444;
+}
+.share-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  text-align: center;
+}
+.share-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.icon {
+  font-size: 28px;
+}
+.whatsapp { color: #25d366; }
+.facebook { color: #1877f2; }
+.instagram { color: #e1306c; }
+.telegram { color: #0088cc; }
+.share-item p {
+  font-size: 12px;
+  margin-top: 4px;
+  color: #333;
+}
+
+/* Download button */
+.download-btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.download-btn:hover {
+  background: #f8f8f8;
+}
+.download-icon {
+  margin-right: 6px;
+  font-size: 18px;
+}
+/* Toggle buttons */
+.toggle-btn {
+  padding: 6px 16px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background: rgb(70, 49, 49);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.toggle-btn.active {
+  background: #f8d7da;   /* light red background for NO */
+  border-color: #dc3545; /* red border */
+  color: #dc3545;        /* red text */
+  font-weight: bold;
+}
+
+.toggle-btn.active-yes {
+  background: #d4edda;   /* light green background for YES */
+  border-color: #28a745; /* green border */
+  color: #28a745;        /* green text */
+  font-weight: bold;
+}
+
+/* Download button */
+.download-btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  border: none;            /* remove default border */
+  border-radius: 8px;
+  background: #007bff;     /* blue background */
+  color: white;            /* white text */
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+
+.download-btn:hover {
+  background: #0056b3;     /* darker blue on hover */
+}
+
+.download-icon {
+  margin-right: 6px;
+  font-size: 18px;
+}
