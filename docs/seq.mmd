@@ -1,0 +1,31 @@
+sequenceDiagram
+  participant User
+  participant Frontend
+  participant API
+  participant Templates
+  participant Shell
+  participant FS
+  participant Visitor
+  participant CDN
+
+  User->>Frontend: select template and submit form
+  Frontend->>API: POST build request
+  API->>API: validate payload
+  API->>Templates: read template manifest
+  alt template exists
+    API->>API: create deployment id and outDir
+    API->>Shell: copy shell to outDir
+    API->>Templates: copy assets and images
+    API->>API: process images (download or copy)
+    API->>FS: save images to outDir images
+    API->>API: rewrite image urls to local paths
+    API->>FS: write data json to outDir
+    API->>API: optional upload to storage
+    API-->>Frontend: return deployment id and index url
+  else template missing
+    API-->>Frontend: return error
+  end
+  User->>Visitor: open index url
+  Visitor->>FS: fetch index html
+  Visitor->>Visitor: load shell and fetch data json
+  Visitor->>Visitor: render page using local images

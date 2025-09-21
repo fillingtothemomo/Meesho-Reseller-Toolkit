@@ -1,0 +1,17 @@
+flowchart TB
+  Start[gallery item url]
+  Start --> IsRemote{Is url remote}
+  IsRemote -- yes --> Download[Download image with timeout]
+  Download --> CheckStatus{Status ok}
+  CheckStatus -- no --> Error[Record error and fallback]
+  CheckStatus -- yes --> CheckType{Content type is image}
+  CheckType -- no --> Error
+  CheckType -- yes --> Limit[Limit bytes while saving]
+  Limit --> Name[Generate safe filename]
+  Name --> Save[Write file to outDir images]
+  Save --> SetUrl[Set item url to local path]
+  IsRemote -- no --> Normalize[Normalize local path]
+  Normalize --> Exists{Exists in template images}
+  Exists -- yes --> Copy[Copy file to outDir images]
+  Copy --> SetUrl
+  Exists -- no --> Error

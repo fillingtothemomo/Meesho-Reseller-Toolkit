@@ -1,0 +1,32 @@
+```mermaid
+flowchart TD
+  U[User Browser]
+  F[Frontend form]
+  S[Go Build API]
+  V[Validate payload]
+  D{Template exists?}
+  C[Create deployment ID]
+  CS[Copy static shell]
+  CA[Copy template assets]
+  PG[Process gallery images]
+  RW[Rewrite data json]
+  WD[Write data json]
+  R[Return deployment info]
+  SV[Serve deployments]
+  OPT[Upload to S3 and CDN]
+  ERR[Return error]
+
+  U --> F
+  F --> S
+  S --> V
+  V --> D
+  D -- yes --> C
+  D -- no --> ERR
+  C --> CS
+  C --> CA
+  C --> PG
+  PG --> RW
+  RW --> WD
+  WD --> R
+  WD --> SV
+  SV --> OPT
